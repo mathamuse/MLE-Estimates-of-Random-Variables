@@ -1,4 +1,4 @@
-# Simulations-of-Random-Variables
+# MLE-Estimators-for-Simulations-of-Random-Variables
 This is a set of Python Codes related to a basic data science Probability Course at a masters level. We study Estimators , in particular, MLE Estimators of various standard probability distributions.
 
 The theory for Maximum Likelihood Estimators can be found briefly here: https://en.wikipedia.org/wiki/Maximum_likelihood_estimation
