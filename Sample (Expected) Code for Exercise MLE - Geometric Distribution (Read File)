@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 ################# Read the csv file, clean data and store as sample #####
-df = pd.read_csv('C:/Users/nucle/Downloads/Sample Data for Exercise MLE - Geometric Distribution.csv',index_col=0)
+df = pd.read_csv('C:/...path.../Sample Data for Exercise MLE - Geometric Distribution.csv',index_col=0)
 
 print(df)
 
