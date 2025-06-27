@@ -1,0 +1,80 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Jan 10 10:25:13 2024
+
+@author: nucle
+"""
+################## HEADERS AND INCLUSIONS ##########################
+import matplotlib.pyplot as plt
+import scipy.stats as sp
+
+################## Define a Binomial Distribution ########################
+###################### p is parameter for probability of getting 1 #######
+def Binomial(p):
+     
+    # generate a uniform variable
+    rv=sp.uniform.rvs()
+    
+    if rv<=p:
+        r=1
+    else:
+        r=0
+    
+    return r            # return 1 with probability p    
+
+################## Create a Binomial Sample ###############################
+####################################################
+def Bin_sample(n,p): #input parameters n = sample width , p is probability parameter
+    sample=[]
+    for i in range(n):
+        sample.append(Binomial(p))
+    
+    #print(sample)       #can use for testing 
+    return sample        # return a sample as array with binomial sampling 
+
+######################## Create an estimator ############################
+######################## take sample and return the sum ################################
+def statis(sample):
+    tmp=0
+    
+    for i in range(len(sample)):
+        tmp+=sample[i]
+        
+    return tmp
+###########################################################################
+##                                  INPUT                                ##   
+###########################################################################
+n=10                               # Sample width initialised
+p=0.312                            # Probability parameter initialised  
+no_of_samples=10000                # number of samples 
+stat=[]                            # storage of samples
+
+##################### Create a Sample ####################
+
+for j in range(no_of_samples):
+    s=Bin_sample(n, p)
+    t=statis(s)
+    stat.append(t)
+
+##################### Output the sample ###################
+#print("\n The Generated Samples are: \n")
+#print(stat)
+
+################## Estimation #############################
+temp = []
+running_total = 0
+for j in range(no_of_samples):
+  i = stat[j] 
+  p_cap = i/n
+  running_total += p_cap
+  temp.append(p_cap)               # mainly for testing
+
+estimator = running_total/no_of_samples
+perc_error = ((estimator-p)/p)*100 
+###########################################################################
+##                                  OUTPUT                               ##
+###########################################################################
+print("\n We estimate the parameter p to be: ",estimator)    # show output of the samples collected
+print("\n % Error in estimate is: ",perc_error)              # show output of the samples collected
+
+plt.hist(stat, bins=100)                                     # graph it as a histogram
