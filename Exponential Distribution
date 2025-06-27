@@ -1,0 +1,43 @@
+################## HEADERS AND INCLUSIONS ##########################
+import numpy as np
+import matplotlib.pyplot as plt
+
+################## Define a Exponential Distribution ########################
+################## lamda is parameter  ######################################
+def waiting_time(lamda):
+    
+    #generate exponential random variable
+    wt = np.random.exponential(1/lamda)
+    
+    return wt
+############################################################################
+
+###########################################################################
+##                                  INPUT                                ##   
+###########################################################################
+
+lamda = 15            # parameter lamda initialized
+
+no_of_samples = 10000 # number of samples initialized
+
+sampler = []          # array to hold the generated samples
+
+#################### Create a sample #############################
+for i in range(no_of_samples):
+    sampler.append(waiting_time(lamda))
+    
+#print(sampler)   # mainly for testing
+
+###########################################################################
+##                                  OUTPUT                               ##
+###########################################################################
+ss = sum(sampler)
+
+estimator = no_of_samples/ss
+
+perc_error = ((estimator - lamda)/lamda)*100
+
+print("\n We estimate the parameter p to be: ",estimator)    # show output of the samples collected
+print("\n % Error in estimate is: ",perc_error)              # show output of the samples collected
+
+plt.hist(sampler,bins = 100)                                 # show graph
