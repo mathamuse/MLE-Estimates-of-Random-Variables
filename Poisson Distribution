@@ -1,0 +1,42 @@
+################## HEADERS AND INCLUSIONS ##########################
+import numpy as np
+import matplotlib.pyplot as plt
+
+################# Define a Poisson Distribution ##########################
+###################### lamda is parameter for Poisson Distribution #######
+def Poisson_gen(lamda):
+    # generate Poisson distribution with parameter lamda
+    rv = np.random.poisson(lamda)
+    
+    return rv
+###########################################################################
+##                                  INPUT                                ##   
+###########################################################################
+no_of_samples = 1000      # number of samples initialzed
+lamda = 10                # lamda parameter initialized
+
+sampler = []              # storage of samples
+
+for i in range(no_of_samples):
+    sampler.append(Poisson_gen(lamda))
+
+############################################################    
+print("\n The generated sample with  p =", lamda ," is : \n")
+print(sampler)                  # mainly for testing
+######################### Estimate ############################
+
+ss = sum(sampler)
+
+estimator = ss/ no_of_samples
+
+perc_error = ((estimator-lamda)/lamda)*100
+###########################################################################
+##                                  OUTPUT                               ##
+###########################################################################
+print("\n We estimate the parameter p to be: ",estimator)    # show output of the samples collected
+print("\n % Error in estimate is: ",perc_error)              # show output of the samples collected
+
+
+#print("Estimator of Lamda is : ", estimator)
+
+plt.hist(sampler,bins=80)         #graph it as a histogram
