@@ -1,0 +1,81 @@
+################## HEADERS AND INCLUSIONS ##########################
+import scipy.stats as sp
+import matplotlib.pyplot as plt
+
+################## Define a Special Dice Distribution ########################
+################## p is parameter = probability of getting 1 #################################
+def special_dice(p):
+    rv=sp.uniform.rvs()
+    
+    if rv<=p :
+        roll=1
+    elif (rv>p and rv<=(p+(1-p)/5)):
+        roll =2
+    elif (rv>(p+(1-p)/5) and rv<=(p+(2*(1-p)/5))):
+        roll =3
+    elif (rv>(p+(2*(1-p)/5)) and rv<=(p+(3*(1-p)/5))):
+        roll =4
+    elif (rv>(p+(3*(1-p)/5)) and rv<=(p+(4*(1-p)/5))):
+        roll =5
+    else:
+        roll =6
+    
+    
+    return roll
+
+########### CREATE Sample ARRAY OF ~WIDTH~ ROLLS OF SPECIAL DICE#########
+def sampler (width, p):
+    sampler = []
+    
+    for i in range(width):
+        sampler.append(special_dice(p))
+    
+    return sampler
+
+########## COUNT NO of ONES and return total #################
+def count1(sample):
+    ct=0
+    for i in range(len(sample)):
+        if (sample[i] == 1):ct+=1
+        
+    return ct
+###########################################################################
+##                                  INPUT                                ##   
+###########################################################################
+
+no_of_samples = 1000          # number of samples initialized
+
+width = 10                    # width of each sample initialized
+
+p = 0.756                     # parameter p initialized
+
+samples =[]                   # storage of samples
+
+################ Create samples ###################
+for i in range(no_of_samples):
+    samples.append(sampler(width,p))
+       
+############################################################    
+print("\n The generated sample with  p =", p ," is : \n")
+print(samples)                  # mainly for testing
+######################### Estimate ############################
+counter = []
+running_total = 0
+
+for i in range(no_of_samples):
+    t= count1(samples[i])
+    running_total += t 
+    counter.append(t)         #mainly for testing
+
+
+estimator = running_total/(no_of_samples*width)
+
+perc_error = ((estimator-p)/p)*100
+
+###########################################################################
+##                                  OUTPUT                               ##
+###########################################################################
+print("\n We estimate the parameter p to be: ",estimator)    # show output of the samples collected
+print("\n % Error in estimate is: ",perc_error)              # show output of the samples collected
+
+plt.hist(counter,bins=width)                                 # graph it as a histogram
