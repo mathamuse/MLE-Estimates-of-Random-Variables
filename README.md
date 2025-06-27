@@ -17,3 +17,6 @@ We do this by:
 * The corresponding Data for this exercise is also included. The Data can be generated as required.
 * Instructors can use the complete code to check the working of students code by standardizing estimation.
 * Lesson notes for the theory are included: Likelihood and MLE is explained. Fisher Information is also tackled in a comparatively 'intutive' manner.
+
+
+A challenge distribution "The Special Dice" is also included. The Special Dice is a dice which has a probability _p_ of showing 1 and remaining numbers are equally probable. A challenge is to create an MLE Estimator for this parameter p and estimate it using Python code. 
