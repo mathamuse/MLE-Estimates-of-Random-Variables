@@ -1,0 +1,28 @@
+
+################## HEADERS AND INCLUSIONS ##########################
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+
+################# Read the csv file, clean data and store as sample #####
+df = pd.read_csv('C:/Users/nucle/Downloads/Sample Data for Exercise MLE - Geometric Distribution.csv',index_col=0)
+
+print(df)
+
+sample = df['0'].to_numpy()
+
+print(sample)
+
+no_of_samples = len(sample)
+
+######################### Estimate ############################
+ss = sum(sample)
+
+estimator = no_of_samples / ss
+
+###########################################################################
+##                                  OUTPUT                               ##
+###########################################################################
+print("\n We estimate the parameter p to be: ",estimator)    # show output of the samples collected
+
+plt.hist(sample, bins=60)                                  # graph it as a histogram
